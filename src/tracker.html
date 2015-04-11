@@ -1,0 +1,66 @@
+<template>
+  <section>
+    <h2>${heading}</h2>
+    <button click.trigger="addFoe()" class="btn btn-primary">Add Featured foe</button>
+    <button click.trigger="addMook()" class="btn btn-primary">Add Mook</button>
+    <label>Sequence:<input type="number" value.two-way="sequence" ></label>
+    <label>Shot:<input type="number" value.two-way="shot" ></label>
+    <button click.trigger="rollInit()" class="btn ${shot>0?'btn-info':'btn-success'}">Roll initiative</button>
+
+    <table class="limited-table">
+      <tr repeat.for="foe of foeList" class="${foe.shot == $parent.shot ? 'green' : foe.shot > $parent.shot ? 'red' : 'normal'}">
+        <td><input type="text" value.two-way="foe.name" ></td>
+        <td>Shot:<input type="number" value.two-way="foe.shot" class="small"></td>
+        <td>Wounds:<input type="number" value.two-way="foe.wounds" class="small"></td>
+        <td>Attack:<input type="number" value.two-way="foe.actionValue" class="small"></td>
+        <td>Defense:<input type="number" value.two-way="foe.defense" class="small"></td>
+        <td>Speed:<input type="number" value.two-way="foe.speed" class="small"></td>
+        <td>Toughness:<input type="number" value.two-way="foe.toughness" class="small"></td>
+        <td><button click.trigger="$parent.rollFoe(foe)" class="btn btn-sm ${foe.shot == $parent.shot ? 'btn-success' : 'btn-default'}">Roll</button></td>
+        <td><button click.trigger="$parent.deleteFoe(foe)" class="btn btn-sm btn-default"><i class="fa fa-trash"></i></button></td>
+      </tr>
+      <tr repeat.for="foe of mookList" class="${foe.shot == $parent.shot ? 'green' : foe.shot > $parent.shot ? 'red' : 'normal'}">
+        <td><input type="text" value.two-way="foe.name" ></td>
+        <td>Shot:<input type="number" value.two-way="foe.shot" class="small"></td>
+        <td>Number:<input type="number" value.two-way="foe.number" class="small"></td>
+        <td>Attack:<input type="number" value.two-way="foe.actionValue" class="small"></td>
+        <td>Defense:<input type="number" value.two-way="foe.defense" class="small"></td>
+        <td>Speed:<input type="number" value.two-way="foe.speed" class="small"></td>
+        <td>Group roll:<input type="checkbox" checked.bind="foe.grouped"></td>
+        <td><button click.trigger="$parent.rollFoe(foe)" class="btn btn-sm ${foe.shot == $parent.shot ? 'btn-success' : 'btn-default'}">Roll</button></td>
+        <td><button click.trigger="$parent.deleteFoe(foe)" class="btn btn-sm btn-default"><i class="fa fa-trash"></i></button></td>
+      </tr>
+    </table>
+
+      <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">${modalTitle}</h4>
+          </div>
+          <div class="modal-body">
+              <template if.bind="rollResult.length<2">
+                  <div style="text-align:center">${rollResult[0]}<div>
+              </template>
+              <template if.bind="rollResult.length>=2">
+                  <div class="bottomMarg">Raw results: ${rollResult}</div>
+                  <div class="bottomMarg">Sorted results: ${sortedResults}</div>
+                  <div class="bottomMarg">
+                    Categorised results
+                    <table class="table table-striped table-bordered table-hover">
+                      <tr><th>Roll score</th><th>Occurence</th></tr>
+                      <tr repeat.for="result of catResults">
+                        <td>${result.value}</td><td>${result.occurence}</td>
+                      </tr>
+                    </table>
+                  </div>
+              </template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</template>

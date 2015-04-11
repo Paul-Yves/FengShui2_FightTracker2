@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+}
+
+.splash {
+    text-align: center;
+    margin: 10% 0 0 0;
+    box-sizing: border-box;
+}
+
+.splash .message {
+    font-size: 72px;
+    line-height: 72px;
+    text-shadow: rgba(0, 0, 0, 0.5) 0 0 15px;
+    text-transform: uppercase;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.splash .fa-spinner {
+    text-align: center;
+    display: inline-block;
+    font-size: 72px;
+    margin-top: 50px;
+}
+
+.page-host {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50px;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+section {
+    margin: 0 20px;
+}
+
+.navbar-nav li.loader {
+    margin: 12px 24px 0 6px;
+}
+
+.pictureDetail {
+    max-width: 425px;
+}
+
+.red{
+    background-color: hsla(1, 100%, 55%, 0.53);
+}
+
+.green{
+    background-color: hsla(121, 100%, 55%, 0.53);
+}
+table.limited-table td{
+    padding: 10px;
+}
+table.limited-table{
+    border-radius: 5px;
+}
+table.limited-table tr:not(:last-child){
+    border-bottom: solid 2px black;
+}
+
+input.small{
+    max-width: 80px;
+}
+
+.bottomMarg{
+    margin-bottom: 10px;
+}
