@@ -8,7 +8,7 @@
     <button click.trigger="rollInit()" class="btn ${shot>0?'btn-info':'btn-success'}">Roll initiative</button>
 
     <table class="limited-table">
-      <tr repeat.for="foe of foeList" class="${foe.shot == $parent.shot ? 'green' : foe.shot > $parent.shot ? 'red' : 'normal'}">
+      <tr repeat.for="foe of foeList" class="${foe.compareShot($parent.shot)}">
         <td><input type="text" value.two-way="foe.name" ></td>
         <td>Shot:<input type="number" value.two-way="foe.shot" class="small"></td>
         <td>Wounds:<input type="number" value.two-way="foe.wounds" class="small"></td>
@@ -19,7 +19,7 @@
         <td><button click.trigger="$parent.rollFoe(foe)" class="btn btn-sm ${foe.shot == $parent.shot ? 'btn-success' : 'btn-default'}">Roll</button></td>
         <td><button click.trigger="$parent.deleteFoe(foe)" class="btn btn-sm btn-default"><i class="fa fa-trash"></i></button></td>
       </tr>
-      <tr repeat.for="foe of mookList" class="${foe.shot == $parent.shot ? 'green' : foe.shot > $parent.shot ? 'red' : 'normal'}">
+      <tr repeat.for="foe of mookList" class="${foe.compareShot($parent.shot)}">
         <td><input type="text" value.two-way="foe.name" ></td>
         <td>Shot:<input type="number" value.two-way="foe.shot" class="small"></td>
         <td>Number:<input type="number" value.two-way="foe.number" class="small"></td>

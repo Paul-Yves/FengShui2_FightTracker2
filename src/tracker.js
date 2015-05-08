@@ -40,7 +40,7 @@ export class Tracker{
   }
 
   rollInit(){
-    this.sequence += 1;
+    this.sequence = parseInt(this.sequence) + 1;
     var maxShot = 0;
     this.foeList.forEach(function(foe){
       var init = foe.rollInit();

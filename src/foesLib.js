@@ -9,8 +9,20 @@ class Character {
   }
 
   rollInit(){
-    this.shot = d6() + this.speed;
+    this.shot = d6() + parseInt(this.speed);
     return this.shot;
+  }
+
+  compareShot(toComp){
+    var myShot = parseInt(this.shot);
+    var globalShot = parseInt(toComp);
+    if(myShot == globalShot){
+      return 'green';
+    }
+    if(myShot > globalShot){
+      return 'red';
+    }
+    return 'normal';
   }
 }
 
