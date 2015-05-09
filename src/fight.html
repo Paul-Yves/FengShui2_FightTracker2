@@ -1,0 +1,32 @@
+<template>
+	<button click.trigger="addFoe()" class="btn btn-primary">Add Featured foe</button>
+	<button click.trigger="addMook()" class="btn btn-primary">Add Mook</button>
+	<label>Sequence:<input type="number" value.two-way="sequence" ></label>
+	<label>Shot:<input type="number" value.two-way="shot" ></label>
+	<button click.trigger="rollInit()" class="btn ${shot>0?'btn-info':'btn-success'}">Roll initiative</button>
+
+	<table class="limited-table">
+		<tr repeat.for="foe of foeList" class="${foe.compareShot($parent.shot, foe.shot)}">
+		  <td><input type="text" value.two-way="foe.name" ></td>
+		  <td>Shot:<input type="number" value.two-way="foe.shot" class="small"></td>
+		  <td>Wounds:<input type="number" value.two-way="foe.wounds" class="small"></td>
+		  <td>Attack:<input type="number" value.two-way="foe.actionValue" class="small"></td>
+		  <td>Defense:<input type="number" value.two-way="foe.defense" class="small"></td>
+		  <td>Speed:<input type="number" value.two-way="foe.speed" class="small"></td>
+		  <td>Toughness:<input type="number" value.two-way="foe.toughness" class="small"></td>
+		  <td><button click.trigger="$parent.rollFoe(foe)" class="btn btn-sm ${foe.shot == $parent.shot ? 'btn-success' : 'btn-default'}">Roll</button></td>
+		  <td><button click.trigger="$parent.deleteFoe(foe)" class="btn btn-sm btn-default"><i class="fa fa-trash"></i></button></td>
+		</tr>
+		<tr repeat.for="foe of mookList" class="${foe.compareShot($parent.shot, foe.shot)}">
+		  <td><input type="text" value.two-way="foe.name" ></td>
+		  <td>Shot:<input type="number" value.two-way="foe.shot" class="small"></td>
+		  <td>Number:<input type="number" value.two-way="foe.number" class="small"></td>
+		  <td>Attack:<input type="number" value.two-way="foe.actionValue" class="small"></td>
+		  <td>Defense:<input type="number" value.two-way="foe.defense" class="small"></td>
+		  <td>Speed:<input type="number" value.two-way="foe.speed" class="small"></td>
+		  <td>Group roll:<input type="checkbox" checked.bind="foe.grouped"></td>
+		  <td><button click.trigger="$parent.rollFoe(foe)" class="btn btn-sm ${foe.shot == $parent.shot ? 'btn-success' : 'btn-default'}">Roll</button></td>
+		  <td><button click.trigger="$parent.deleteFoe(foe)" class="btn btn-sm btn-default"><i class="fa fa-trash"></i></button></td>
+		</tr>
+	</table>
+</template>

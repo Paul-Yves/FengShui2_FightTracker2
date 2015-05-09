@@ -69,3 +69,7 @@ input.small{
 .bottomMarg{
     margin-bottom: 10px;
 }
+
+div.otherFight{
+    display: none;
+}
