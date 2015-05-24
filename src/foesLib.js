@@ -1,5 +1,5 @@
 import {Behavior} from 'aurelia-framework';
-import {d6, roll} from 'dist/diceLib'
+import {d6, roll} from 'diceLib'
 
 class Character {
   constructor(){

@@ -1,14 +1,13 @@
-import {Router} from 'aurelia-router';
+import 'bootstrap';
+import 'bootstrap/css/bootstrap.css!';
 
 export class App {
-  static inject() { return [Router]; }
-  constructor(router) {
+  configureRouter(config, router){
+    config.title = 'Feng Shui 2';
+    config.map([
+      { route: ['','tracker'], moduleId: './tracker', nav: true, title:'Fight Tracker' }
+    ]);
+
     this.router = router;
-    this.router.configure(config => {
-      config.title = 'Feng Shui 2';
-      config.map([
-        { route: ['','tracker'], moduleId: 'tracker', nav: true, title:'Fight Tracker' }
-      ]);
-    });
   }
 }

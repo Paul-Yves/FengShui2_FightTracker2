@@ -1,8 +1,6 @@
-import 'jspm_packages/github/components/jquery@2.1.3/jquery.min'
-import 'jspm_packages/github/twbs/bootstrap@3.3.2/js/bootstrap.min'
-
-import {FeaturedFoe, Mook} from 'dist/foesLib'
-import {d6, d6Explode} from 'dist/diceLib'
+import 'jquery'
+import {FeaturedFoe, Mook} from 'foesLib'
+import {d6, d6Explode} from 'diceLib'
 
 
 class Fight{

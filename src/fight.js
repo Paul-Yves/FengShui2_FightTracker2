@@ -2,8 +2,8 @@ import 'jspm_packages/github/components/jquery@2.1.3/jquery.min'
 
 import {customElement, bindable} from 'aurelia-framework';
 
-import {FeaturedFoe, Mook} from 'dist/foesLib'
-import {d6, d6Explode} from 'dist/diceLib'
+import {FeaturedFoe, Mook} from 'foesLib'
+import {d6, d6Explode} from 'diceLib'
 
 
 
