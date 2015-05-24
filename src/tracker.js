@@ -82,7 +82,7 @@ class Fight{
       this.tracker.catResults.push({"value":countedVal, "occurence":occurence});
     }
     //displaying the modal
-    $('#myModal').modal('show')
+    $('#myModal').modal('show');
   }
 }
 
@@ -111,78 +111,28 @@ export class Tracker{
     this.fightList.push(new Fight(this, 'newFight'));
   }
 
+  delFight(){
+    var fightIdx = this.fightList.indexOf(this.currentFight);
+    if(fightIdx > -1 && this.fightList.length > 1){
+      this.fightList.splice(fightIdx, 1);
+      fightIdx = (fightIdx > 0) ? (fightIdx - 1) : 0;
+      this.currentFight = this.fightList[fightIdx];
+    }
+  }
+
+  renameFightDialog(){
+    $('#renameDialogModal').modal('show');
+  }
+
+  renameFight(newName){
+    console.log(newName);
+    if(newName != ""){
+      this.currentFight.name = newName;
+    }
+    $('#renameDialogModal').modal('hide');
+  }
+
   selectFight(fight){
     this.currentFight = fight;
-  }
-
-  addFoe(){
-    var newFoe = new FeaturedFoe();
-    this.foeList.push(newFoe);
-  }
-
-  addMook(){
-    var newMook = new Mook();
-    this.mookList.push(newMook);
-  }
-
-  deleteFoe(foe){
-    var idx = this.foeList.indexOf(foe);
-    if(idx>=0){
-      this.foeList.splice(idx,1);
-    }
-    idx = this.mookList.indexOf(foe);
-    if(idx>=0){
-      this.mookList.splice(idx,1);
-    }    
-  }
-
-  rollInit(){
-    this.sequence = parseInt(this.sequence) + 1;
-    var maxShot = 0;
-    this.foeList.forEach(function(foe){
-      var init = foe.rollInit();
-      if(init>maxShot){
-        maxShot = init;
-      }
-    });
-    this.mookList.forEach(function(foe){
-      var init = foe.rollInit();
-      if(init>maxShot){
-        maxShot = init;
-      }
-    });
-    this.shot = maxShot;
-  }
-
-  rollFoe(foe){
-    this.modalTitle = "Foe "+foe.name+" rolled:"
-    this.rollResult = foe.roll();
-    //case where we have multiple rolls
-    if(this.rollResult.length >= 2){
-      //generating array of sorted result
-      this.sortedResults = this.rollResult.slice();
-      this.sortedResults.sort(function (a, b) {
-        return (parseInt(b) - parseInt(a));
-      });
-      //generating array of sorted result aggregated by value
-      while(this.catResults.length>0){
-        //we empty the array this way so that data-binding erase the array properly in view
-        this.catResults.splice(0,this.catResults.length);
-      }
-      var countedVal = this.sortedResults[0];
-      var occurence = 0;
-      for (var i = 0; i < this.sortedResults.length; i++) {
-        if(countedVal !== this.sortedResults[i]){
-          this.catResults.push({"value":countedVal, "occurence":occurence});
-          countedVal = this.sortedResults[i];
-          occurence = 1;
-        } else {
-          occurence += 1;   
-        }
-      }
-      this.catResults.push({"value":countedVal, "occurence":occurence});
-    }
-    //displaying the modal
-    $('#myModal').modal('show')
   }
 }
