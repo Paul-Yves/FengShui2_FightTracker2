@@ -15,7 +15,6 @@ class Character {
 
   //second argument ensure proper refresh when doing roll()
   compareShot(toComp, myShot){
-    console.log('comparing shots');
     var myShot = parseInt(this.shot);
     var globalShot = parseInt(toComp);
     if(myShot == globalShot){

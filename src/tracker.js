@@ -94,10 +94,6 @@ export class Tracker{
     this.fightList.push(new Fight(this, 'First Fight'));
     this.currentFight = this.fightList[0];
 
-    this.sequence = 0;
-    this.shot = 0;
-    this.foeList = [];
-    this.mookList = [];
     //modal data
     this.modalTitle = "Roll";
     this.rollResult = 0;
