@@ -1,5 +1,5 @@
 import 'jquery'
-import {FeaturedFoe, Mook} from 'foesLib'
+import {FeaturedFoe, Mook, Car, MookCar} from 'foesLib'
 import {d6, d6Explode} from 'diceLib'
 
 
@@ -10,8 +10,17 @@ class Fight{
     this.shot = 0;
     this.foeList = [];
     this.mookList = [];
+    this.carList = [];
+    this.mookCarList = [];
 
     this.tracker = tracker;
+
+    this.hasChase = false;
+  }
+
+  toggleChase(){
+    this.hasChase = !this.hasChase;
+    console.log(this.hasChase);
   }
 
   addFoe(){
@@ -24,14 +33,32 @@ class Fight{
     this.mookList.push(newMook);
   }
 
+  addCar(){
+    var newCar = new Car();
+    this.carList.push(newCar);
+  }
+
+  addMookCar(){
+    var newCar = new MookCar();
+    this.mookCarList.push(newCar);
+  }
+
   deleteFoe(foe){
     var idx = this.foeList.indexOf(foe);
     if(idx>=0){
       this.foeList.splice(idx,1);
     }
+    idx = this.carList.indexOf(foe);
+    if(idx>=0){
+      this.carList.splice(idx,1);
+    }    
     idx = this.mookList.indexOf(foe);
     if(idx>=0){
       this.mookList.splice(idx,1);
+    }    
+    idx = this.mookCarList.indexOf(foe);
+    if(idx>=0){
+      this.mookCarList.splice(idx,1);
     }    
   }
 
@@ -45,6 +72,18 @@ class Fight{
       }
     });
     this.mookList.forEach(function(foe){
+      var init = foe.rollInit();
+      if(init>maxShot){
+        maxShot = init;
+      }
+    });
+    this.carList.forEach(function(foe){
+      var init = foe.rollInit();
+      if(init>maxShot){
+        maxShot = init;
+      }
+    });
+    this.mookCarList.forEach(function(foe){
       var init = foe.rollInit();
       if(init>maxShot){
         maxShot = init;

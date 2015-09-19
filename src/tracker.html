@@ -32,6 +32,7 @@
       <label>Sequence:<input type="number" value.two-way="fight.sequence" ></label>
       <label>Shot:<input type="number" value.two-way="fight.shot" ></label>
       <button click.trigger="fight.rollInit()" class="btn ${fight.shot>0?'btn-info':'btn-success'}">Roll initiative</button>
+      <button click.trigger="fight.toggleChase()" class="btn btn-info">${fight.hasChase ? 'remove chase' : 'add car chase'}</button>
       <div class="table-responsive">
         <table class="table table-bordered v-centering">
           <tr repeat.for="foe of fight.foeList" class="${foe.compareShot($parent.fight.shot, foe.shot)}">
@@ -57,6 +58,63 @@
             <td><button click.trigger="$parent.fight.deleteFoe(foe)" class="btn btn-sm btn-default"><i class="fa fa-trash"></i></button></td>
           </tr>
         </table>
+      </div>
+      <!-- car chase table -->
+      <div class="${fight.hasChase ?'visible':'hiddenDiv'}">
+        <button click.trigger="fight.addCar()" class="btn btn-primary">Add Vehicle</button>
+        <button click.trigger="fight.addMookCar()" class="btn btn-primary">Add Mook Vehicle</button>
+        <div class="table-responsive">
+          <table class="table table-bordered v-centering">
+            <tr repeat.for="foe of fight.carList" class="${foe.compareShot($parent.fight.shot, foe.shot)}">
+              <td><input type="text" value.two-way="foe.name" ></td>
+              <td>Shot:<input type="number" value.two-way="foe.shot" class="small"></td>
+              <td>Chase points:<input type="number" value.two-way="foe.wounds" class="small"></td>
+              <td>Driving:<input type="number" value.two-way="foe.actionValue" class="small"></td>
+              <td>Acceleration:<input type="number" value.two-way="foe.speed" class="small"></td>
+              <td>Handling:<input type="number" value.two-way="foe.defense" class="small"></td>
+              <td>Frame:<input type="number" value.two-way="foe.toughness" class="small"></td>
+              <td>
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn ${foe.position == 'far' ? 'btn-primary' : 'btn-default'}" click.trigger="foe.setPos('far')">
+                    <input type="radio" name="position" id="far" autocomplete="off" checked> Far
+                  </label>
+                  <label class="btn ${foe.position == 'near' ? 'btn-primary' : 'btn-default'}" click.trigger="foe.setPos('near')">
+                    <input type="radio" name="position" id="near" autocomplete="off"> Near
+                  </label>
+                  <label class="btn ${foe.position == 'evader' ? 'btn-primary' : 'btn-default'}" click.trigger="foe.setPos('evader')">
+                    <input type="radio" name="position" id="evader" autocomplete="off"> Evader
+                  </label>
+                </div>
+              </td>
+              <td><button click.trigger="$parent.fight.rollFoe(foe)" class="btn btn-sm ${foe.shot == $parent.fight.shot ? 'btn-success' : 'btn-default'}">Roll</button></td>
+              <td><button click.trigger="$parent.fight.deleteFoe(foe)" class="btn btn-sm btn-default"><i class="fa fa-trash"></i></button></td>
+            </tr>
+            <tr repeat.for="foe of fight.mookCarList" class="${foe.compareShot($parent.fight.shot, foe.shot)}">
+              <td><input type="text" value.two-way="foe.name" ></td>
+              <td>Shot:<input type="number" value.two-way="foe.shot" class="small"></td>
+              <td>Number:<input type="number" value.two-way="foe.number" class="small"></td>
+              <td>Driving:<input type="number" value.two-way="foe.actionValue" class="small"></td>
+              <td>Acceleration:<input type="number" value.two-way="foe.speed" class="small"></td>
+              <td>Handling:<input type="number" value.two-way="foe.defense" class="small"></td>
+              <td>Frame:<input type="number" value.two-way="foe.toughness" class="small"></td>
+              <td>
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn ${foe.position == 'far' ? 'btn-primary' : 'btn-default'}" click.trigger="foe.setPos('far')">
+                    <input type="radio" name="position" id="far" autocomplete="off" checked> Far
+                  </label>
+                  <label class="btn ${foe.position == 'near' ? 'btn-primary' : 'btn-default'}" click.trigger="foe.setPos('near')">
+                    <input type="radio" name="position" id="near" autocomplete="off"> Near
+                  </label>
+                  <label class="btn ${foe.position == 'evader' ? 'btn-primary' : 'btn-default'}" click.trigger="foe.setPos('evader')">
+                    <input type="radio" name="position" id="evader" autocomplete="off"> Evader
+                  </label>
+                </div>
+              </td>
+              <td><button click.trigger="$parent.fight.rollFoe(foe)" class="btn btn-sm ${foe.shot == $parent.fight.shot ? 'btn-success' : 'btn-default'}">Roll</button></td>
+              <td><button click.trigger="$parent.fight.deleteFoe(foe)" class="btn btn-sm btn-default"><i class="fa fa-trash"></i></button></td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
 

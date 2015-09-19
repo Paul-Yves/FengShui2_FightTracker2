@@ -76,6 +76,38 @@ export class Mook extends Character{
       return list;
     }
   }
+}
 
 
+
+export class Car extends FeaturedFoe{
+  constructor(){
+    super();
+    this.name = 'New vehicle';
+    this.actionValue = 12;
+    this.speed = 8;
+    this.toughness = 7;
+    this.defense = 7;
+    this.position = 'far';
+  }
+  setPos(newPos){
+    this.position = newPos;
+  }
+}
+
+export class MookCar extends Mook{
+  constructor(){
+    super();
+    this.name = 'Mook vehicles';
+    this.actionValue = 8;
+    this.number = 5;
+    this.speed = 8;
+    this.defense = 6;
+    this.toughness = 7;
+    this.grouped = false;
+    this.position = 'far';
+  }
+  setPos(newPos){
+    this.position = newPos;
+  }
 }

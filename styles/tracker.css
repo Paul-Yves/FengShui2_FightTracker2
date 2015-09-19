@@ -31,3 +31,6 @@ ul.nav.navButtons li:hover{
 table.table.v-centering td{
 	vertical-align: middle;
 }
+div.hiddenDiv{
+	display: none;
+}
